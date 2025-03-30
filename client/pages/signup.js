@@ -1,10 +1,16 @@
+import React, { useState } from 'react';
 import {useForm} from 'react-hook-form';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../lib/firebase';
 import axios from 'axios';
+import { useRouter } from 'next/router'
 
 const SignUp = () => {
     const {register, handleSubmit} = useForm();
+    const [firebaseError, setFirebaseError] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+    const router = useRouter()
+
     
     const onSubmit = async (data) => {
         const { email, password, name } = data;
@@ -16,8 +22,18 @@ const SignUp = () => {
             const response = await axios.post('http://localhost:5001/api/users', {name, email, uid: user.uid});
             console.log('Saved to DB:', response.data);
 
+            setErrorMsg('');
+
+            router.push('/');
+
         } catch(error) {
-            console.error('Error signing up:', error.message);
+            if (error.code === 'auth/weak-password') {
+                setFirebaseError('Password must be at least 6 characters.');
+            } else if (error.code === "auth/email-already-in-use") {
+                    setErrorMsg("An account with this email already exists. Try logging in instead.");
+                } else {
+                setFirebaseError(error.message);
+            }
         }
     }
 
@@ -45,9 +61,17 @@ const SignUp = () => {
                 <input type='password' {...register('password')} 
                 className="bg-gray-50 border border-gray-300 rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-black"/>
                 </div>
+                <small className="text-sm text-gray-500 mt-1">
+                    Password must be at least 6 characters.
+                </small>
             </label>
+            
+            {errorMsg && <p className="text-red-500 text-sm text-center">{errorMsg}</p>}
+            {firebaseError && (
+                <p className="text-red-500 text-sm mt-2 text-center">{firebaseError}</p>
+            )}
 
-            <button class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer" type='submit'>Sign Up</button>
+            <button class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer" type='submit' >Sign Up</button>
 
         </form>
         </div>
