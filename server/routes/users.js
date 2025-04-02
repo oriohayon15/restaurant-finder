@@ -17,4 +17,11 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.get('/:uid', async (req, res) => {
+    const { uid } = req.params;
+    const result = await pool.query('SELECT * FROM users WHERE firebase_uid = $1', [uid]);
+    res.json(result.rows[0]);
+});
+
+
 module.exports = router;
