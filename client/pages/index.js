@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useAuth } from '../lib/authcontext'; 
+import Logout from './logout';
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -11,7 +12,10 @@ export default function Home() {
       <h1 className="text-2xl font-bold mb-4">Welcome to Local Restaurant Finder</h1>
 
       {user ? (
+        <>
         <h2 className="text-xl font-semibold mb-4">Welcome, {user.name}!</h2>
+        <Logout />
+        </>
       ) : (
         <>
 
