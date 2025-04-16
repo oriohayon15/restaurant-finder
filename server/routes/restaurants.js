@@ -14,8 +14,8 @@ router.get('/search', async (req, res) => {
                 key: process.env.GOOGLE_PLACES_API_KEY
             }
         })
-
-        res.json(response.data.results); 
+        const filtered = response.data.results.filter(place => place.types.includes("restaurant"));
+        res.json(filtered); 
     }
     catch (error) {
         console.error('Google Places API error:', error.message);
