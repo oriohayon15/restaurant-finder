@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useAuth } from '../lib/authcontext'; 
 import Logout from './logout';
+import SearchBar from '../pages/searchbar'; 
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -29,6 +30,9 @@ export default function Home() {
       </Link>
       </>
       )}
+
+    <SearchBar />
+
     </div>
   );
 }
