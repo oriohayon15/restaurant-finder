@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SearchBar = () => {
+const SearchBar = ({onSearchResults}) => {
     const [location, setLocation] = useState('');
     const [category, setCategory] = useState('');
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
+        if (!location || !category) {
+            alert('Please enter both location and category');
+            return;
+        }
 
+        try {
+            const response = await axios.get('http://localhost:5001/api/restaurants/search', {
+                params: {location, category}
+            });
+
+            if(onSearchResults) {
+                onSearchResults(response.data);
+            }
+        } catch(error) {
+            console.error('Search failed: ', error);
+            alert('Something went wrong. Please try again.');
+        }
     }
 
     return (
