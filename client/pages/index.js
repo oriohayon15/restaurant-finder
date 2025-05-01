@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '../lib/authcontext'; 
 import Logout from './logout';
 import SearchBar from '../pages/searchbar'; 
 
+
 export default function Home() {
   const { user, loading } = useAuth();
+  const [restaurants, setRestaurants] = useState([]);
 
   if (loading) return <p>Loading...</p>;
 
@@ -31,7 +34,26 @@ export default function Home() {
       </>
       )}
 
-    <SearchBar />
+    <SearchBar onSearchResults={setRestaurants}/>
+
+    <div>
+      {restaurants.length === 0 && (
+      <p className="text-center text-gray-600 mt-4">
+        No results yet. Try searching!
+      </p>
+    )}
+      {restaurants.length > 0 && (
+        restaurants.map((restaurant) => (
+          <div key={restaurant.placeId}>
+            <h3>{restaurant.name}</h3>
+            <p>{restaurant.address}</p>
+            <p>{restaurant.total_ratings}</p>
+            <p>{restaurant.ratings}</p>
+            <p>{restaurant.isOpen}</p>
+          </div>
+        ))
+      )} 
+    </div>
 
     </div>
   );
