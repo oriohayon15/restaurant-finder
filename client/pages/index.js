@@ -45,10 +45,16 @@ export default function Home() {
       {restaurants.length > 0 && (
         restaurants.map((restaurant) => (
           <div key={restaurant.placeId}>
+            {restaurant.photo && (
+            <img
+            src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${restaurant.photo}&key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}`}
+            alt={restaurant.name}
+            className="w-full h-48 object-cover rounded"
+            />
+            )}
             <h3>{restaurant.name}</h3>
             <p>{restaurant.address}</p>
-            <p>{restaurant.total_ratings}</p>
-            <p>{restaurant.ratings}</p>
+            <p>{restaurant.total_ratings}, {restaurant.ratings}</p>
             <p>{restaurant.isOpen}</p>
           </div>
         ))
