@@ -45,7 +45,14 @@ export default function Home() {
     <div className="grid grid-cols-1 gap-6 justify-items-center mt-6">
       {restaurants.length > 0 && (
         restaurants.map((restaurant) => (
-          <div key={restaurant.placeId} className="restaurant-card bg-white rounded-2xl overflow-hidden w-[500px] h-[350px] flex flex-col shadow-2xl border border-gray-300 transition-all duration-300 hover:border-gray-500 hover:ring-8 hover:ring-blue-200 hover:shadow-2xl hover:shadow-blue-300">
+          <a
+            key={restaurant.placeId}
+            href={`https://www.google.com/maps/place/?q=place_id:${restaurant.placeId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="restaurant-card bg-white rounded-2xl overflow-hidden w-[575px] h-[360px] flex flex-col shadow-2xl border border-gray-300 transition-all duration-300 hover:border-gray-500 hover:ring-8 hover:ring-blue-200 hover:shadow-2xl hover:shadow-blue-300"
+          >
+
             {restaurant.photo && (
             <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${restaurant.photo}&key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}`}
             alt={restaurant.name}
@@ -57,7 +64,7 @@ export default function Home() {
             <p className='p-1.5'>Total Reviews/Ratings: {restaurant.total_ratings}, ⭐️{restaurant.ratings}/5</p>
             <p className={ restaurant.isOpen ? 'p-1.5 text-green-600' :  'p-1.5 text-red-600'}>
             {restaurant.isOpen ? 'Open Now' : 'Closed'}</p>
-          </div>
+          </a>
         ))
       )} 
       </div>
