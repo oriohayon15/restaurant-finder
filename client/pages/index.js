@@ -52,10 +52,10 @@ export default function Home() {
             className="w-full h-48 object-cover rounded"
             />
             )}
-            <h3 className='font-bold'>{restaurant.name}</h3>
-            <p>Address: {restaurant.address}</p>
-            <p>Total Reviews/Ratings: {restaurant.total_ratings}, ⭐️{restaurant.ratings}/5</p>
-            <p className={restaurant.isOpen ? 'text-green-600' : 'text-red-600'}>
+            <h3 className='font-bold p-1.5'>{restaurant.name}</h3>
+            <p className='p-1.5'>Address: {restaurant.address}</p>
+            <p className='p-1.5'>Total Reviews/Ratings: {restaurant.total_ratings}, ⭐️{restaurant.ratings}/5</p>
+            <p className={ restaurant.isOpen ? 'p-1.5 text-green-600' :  'p-1.5 text-red-600'}>
             {restaurant.isOpen ? 'Open Now' : 'Closed'}</p>
           </div>
         ))
