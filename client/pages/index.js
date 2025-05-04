@@ -13,12 +13,13 @@ export default function Home() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Welcome to Local Restaurant Finder</h1>
-
+      <h1 className="text-2xl font-extrabold mb-4">Welcome to LocalEats</h1>
       {user ? (
         <>
-        <h2 className="text-xl font-semibold mb-4">Welcome, {user.name}!</h2>
-        <Logout />
+        <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold mb-4">Hi, {user.name}!</h2>
+        < Logout />
+        </div>
         </>
       ) : (
         <>
