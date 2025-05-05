@@ -17,4 +17,23 @@ router.post('/save', async(req, res) => {
     }
 });
 
+router.delete('/remove', async(req, res) => {
+    const {user_id, restaurant_id} = req.body;
+
+    try {
+        const result = await pool.query(
+            'DELETE FROM saved_restaurants WHERE user_id = $1 AND restaurant_id = $2 RETURNING *',
+            [user_id, restaurant_id]);
+
+            res.status(200).json({ message: 'Removed from favorites succesfully'});
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to remove from favorites' });
+    }
+});
+
+router.get('/:userId', async (req, res) => {
+    const { userId } = req.params;
+})
+
 module.exports = router;
