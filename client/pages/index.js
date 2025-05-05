@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '../lib/authcontext'; 
 import Logout from './logout';
-import SearchBar from '../pages/searchbar'; 
-
+import SearchBar from '../pages/searchbar';
+import { saveToFavorites } from '../utils/favorites'; 
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -74,7 +74,14 @@ export default function Home() {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                saveToFavorites(restaurant.placeId)}}
+                saveToFavorites(user.id, restaurant.placeId).then((res) => {
+                  if (res.success) {
+                    console.log("Saved to favorites!");
+                  } else {
+                    console.error("Error saving:", res.error); 
+                  }
+                });
+              }}
               className=" bg-blue-600 text-white text-sm font-bold py-2 px-4 rounded hover:bg-blue-800 transition cursor-pointer">
                 Save to Favorites
             </button>
