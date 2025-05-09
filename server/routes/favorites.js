@@ -41,7 +41,35 @@ router.get('/:userId', async (req, res) => {
             'SELECT * FROM saved_restaurants WHERE user_id = $1',
             [userId]
         );
-        res.status(200).json(result.rows);
+
+        const placeIds = result.rows.map((row) => row.restaurant_id);
+
+            const requests = placeIds.map((placeId) =>
+                axios
+                  .get('https://maps.googleapis.com/maps/api/place/details/json', {
+                    params: {
+                      place_id: placeId,
+                      key: process.env.GOOGLE_PLACES_API_KEY,
+                      fields: 'name,rating,formatted_address,photos,opening_hours,place_id,user_ratings_total',
+                    },
+                  })
+                    .then((res) => {
+                    const r = res.data.result;
+                    return {
+                        placeId: r.place_id,
+                        name: r.name,
+                        ratings: r.rating,
+                        total_ratings: r.user_ratings_total,
+                        address: r.formatted_address,
+                        isOpen: r.opening_hours?.open_now,
+                        photo: r.photos?.[0]?.photo_reference || null,
+                    };
+                  })
+                );
+
+                const fullDetails = await Promise.all(requests);
+
+                res.status(200).json(fullDetails);
     } catch(err) {
         console.error(err);
         res.status(500).json({ error: 'Failed to fetch favorites' });
