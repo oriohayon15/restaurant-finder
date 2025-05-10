@@ -76,7 +76,7 @@ export default function Home() {
                 e.stopPropagation();
                 saveToFavorites(user.id, restaurant.placeId).then((res) => {
                   if (res.success) {
-                    console.log("Saved to favorites!");
+                    console.log("Saved to favorites!"); //change to actual success message 
                   } else {
                     console.error("Error saving:", res.error); 
                   }
