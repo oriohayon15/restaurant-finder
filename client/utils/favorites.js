@@ -14,3 +14,20 @@ export const saveToFavorites = async (userId, restaurantId) => {
         return { success: false, error: errorMsg };
     }
 };
+
+export const removeFavorites = async (userId, restaurantId) => {
+    try {
+        const res = await axios.delete('http://localhost:5001/api/favorites/remove', {
+            data: {
+                user_id: userId,
+                restaurant_id: restaurantId,
+            },
+        });
+    
+        return { success: true, data: res.data };
+    } catch(err) {
+        console.error('Failed to remove from favorites:', err);
+        const errorMsg = err.response?.data?.error || err.message || 'Unknown error';
+        return { success: false, error: errorMsg };
+    }
+};

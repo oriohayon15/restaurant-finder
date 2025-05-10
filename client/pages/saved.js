@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../lib/authcontext';
 import axios from 'axios';
+import { removeFavorites } from '../utils/favorites';
 
 const SavedRestaurants = () => {
   const [favorites, setFavorites] = useState(null);
@@ -65,7 +66,16 @@ const SavedRestaurants = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      console.log("Remove from favorites clicked");
+                      
+                      removeFavorites(user.id, restaurant.placeId).then((res) => {
+                        if (res.success) {
+                          setFavorites(prev =>
+                            prev.filter(r => r.placeId !== restaurant.placeId)
+                          );
+                        } else {
+                          console.error("Error removing:", res.error);
+                        }
+                      });
                     }}
                     className="bg-red-600 text-white text-sm font-bold py-2 px-4 rounded hover:bg-red-800 transition cursor-pointer"
                   >
