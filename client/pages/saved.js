@@ -26,9 +26,9 @@ const SavedRestaurants = () => {
       )}
 
       {favorites?.length === 0 && (
-        <p className="text-center text-gray-600 mt-4">
+        <h1 className="text-center font-bold text-gray-600 mt-4">
           No restaurants have been saved to favorites yet! Try saving!
-        </p>
+        </h1>
       )}
 
       {favorites?.length > 0 && (
@@ -87,6 +87,15 @@ const SavedRestaurants = () => {
           ))}
         </div>
       )}
+       <style jsx>{`
+      .restaurant-card {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+      .restaurant-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.25), 0 10px 10px -5px rgba(59, 130, 246, 0.2);
+        }
+    `}</style>
     </div>
   );
 };

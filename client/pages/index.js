@@ -4,6 +4,7 @@ import { useAuth } from '../lib/authcontext';
 import Logout from './logout';
 import SearchBar from '../pages/searchbar';
 import { saveToFavorites } from '../utils/favorites'; 
+import Image from 'next/image';
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -12,14 +13,26 @@ export default function Home() {
   if (loading) return <p className='text-center'>Loading...</p>;
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-extrabold mb-4">Welcome to LocalEats</h1>
+    <div className="p-4 ">
+      <div className="flex justify-center items-center my-4">
+      <Image 
+        src="/logo.gif"
+        alt="LocalEats Logo"
+        width={600}
+        height={108}
+        priority
+      />
+      </div>
+
       {user ? (
         <>
         <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold mb-4">Hi, {user.name}!</h2>
+        <h1 className="text-xl font-semibold mb-4">Hi, {user.name}!</h1>
         < Logout />
         </div>
+        <Link href="/saved">
+          <button className="bg-[#ffccc1] hover:bg-[#fde9e5] text-black font-bold py-2 px-4 rounded-full cursor-pointer">View Saved Restaurants</button>
+        </Link>
         </>
       ) : (
         <>
