@@ -9,6 +9,7 @@ import Image from 'next/image';
 export default function Home() {
   const { user, loading } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
+  const [savedRestaurantId, setSavedRestaurantId] = useState(null);
 
   if (loading) return <p className='text-center'>Loading...</p>;
 
@@ -56,6 +57,7 @@ export default function Home() {
         No results yet. Try searching!
       </p>
     )}
+
     <div className="grid grid-cols-1 gap-6 justify-items-center mt-6">
       {restaurants.length > 0 && (
         restaurants.map((restaurant) => (
@@ -89,7 +91,8 @@ export default function Home() {
                 e.stopPropagation();
                 saveToFavorites(user.id, restaurant.placeId).then((res) => {
                   if (res.success) {
-                    console.log("Saved to favorites!"); //change to actual success message 
+                    setSavedRestaurantId(restaurant.placeId);
+                    setTimeout(() => setSavedRestaurantId(null), 2000); 
                   } else {
                     console.error("Error saving:", res.error); 
                   }
@@ -98,6 +101,10 @@ export default function Home() {
               className=" bg-blue-600 text-white text-sm font-bold py-2 px-4 rounded hover:bg-blue-800 transition cursor-pointer">
                 Save to Favorites
             </button>
+            {savedRestaurantId === restaurant.placeId && (
+              <p className="text-green-600 text-sm mt-2">✔️ Successfully saved to Favorites!</p>
+            )}
+
             </div>
           )}
           </div>
