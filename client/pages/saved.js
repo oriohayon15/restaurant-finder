@@ -24,10 +24,10 @@ const SavedRestaurants = () => {
   return (
     <div>
       <Link href="/">
-  <div className="p-2">
-    <HomeIcon className="w-15 h-15 text-gray-600 hover:text-black cursor-pointer" />
-  </div>
-</Link>
+        <div className="p-2">
+          <HomeIcon className="w-15 h-15 text-gray-600 hover:text-black cursor-pointer" />
+        </div>
+      </Link>
 
       {favorites === null && (
         <p>Loading...</p>
