@@ -5,6 +5,7 @@ import Logout from './logout';
 import SearchBar from '../pages/searchbar';
 import { saveToFavorites } from '../utils/favorites'; 
 import Image from 'next/image';
+import { Home as HomeIcon} from 'lucide-react';
 
 export default function Home() {
   const { user, loading } = useAuth();

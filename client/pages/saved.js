@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../lib/authcontext';
 import axios from 'axios';
 import { removeFavorites } from '../utils/favorites';
+import Link from 'next/link';
+import { Home as HomeIcon} from 'lucide-react';
 
 const SavedRestaurants = () => {
   const [favorites, setFavorites] = useState(null);
@@ -21,6 +23,12 @@ const SavedRestaurants = () => {
 
   return (
     <div>
+      <Link href="/">
+  <div className="p-2">
+    <HomeIcon className="w-15 h-15 text-gray-600 hover:text-black cursor-pointer" />
+  </div>
+</Link>
+
       {favorites === null && (
         <p>Loading...</p>
       )}
