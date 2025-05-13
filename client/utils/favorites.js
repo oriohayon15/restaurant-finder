@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const saveToFavorites = async (userId, restaurantId) => {
     try {
-        const res = await axios.post('http://localhost:5001/api/favorites/save', {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/save`, {
             user_id: userId,
             restaurant_id: restaurantId,
         });
@@ -17,7 +17,7 @@ export const saveToFavorites = async (userId, restaurantId) => {
 
 export const removeFavorites = async (userId, restaurantId) => {
     try {
-        const res = await axios.delete('http://localhost:5001/api/favorites/remove', {
+        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/remove`, {
             data: {
                 user_id: userId,
                 restaurant_id: restaurantId,
