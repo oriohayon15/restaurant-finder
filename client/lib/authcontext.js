@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
             if (firebaseUser) {
                 try {
-                    const res = await axios.get(`http://localhost:5001/api/users/${firebaseUser.uid}`);
+                    const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${firebaseUser.uid}`);
                     setUser({ ...res.data, uid: firebaseUser.uid });
                 } catch (error) {
                     console.error('Failed to fetch user from DB:', error);
