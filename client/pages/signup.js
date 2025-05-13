@@ -19,7 +19,7 @@ const SignUp = () => {
             const user = userCredential.user;
             console.log('User created:', user.uid, email, name);
 
-            const response = await axios.post('http://localhost:5001/api/users', {name, email, uid: user.uid});
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users`, {name, email, uid: user.uid});
             console.log('Saved to DB:', response.data);
 
             setErrorMsg('');

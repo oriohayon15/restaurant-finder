@@ -12,7 +12,7 @@ const SearchBar = ({onSearchResults}) => {
         }
 
         try {
-            const response = await axios.get('http://localhost:5001/api/restaurants/search', {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/search`, {
                 params: {location, category}
             });
 

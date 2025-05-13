@@ -11,7 +11,7 @@ const SavedRestaurants = () => {
 
   useEffect(() => {
     if (user) {
-      axios.get(`http://localhost:5001/api/favorites/${user.id}`)
+      axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/${user.id}`)
         .then((res) => {
           setFavorites(res.data);
         })
