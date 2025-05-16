@@ -1,6 +1,8 @@
-LocalEats
+**LocalEats**
 
 LocalEats is a full-stack web application that enables users to discover local restaurants by location and cuisine preferences. Authenticated users can save and manage their favorite spots in a sleek, responsive interface built with modern web technologies.
+
+---
 
 ⚠️ Disclaimer
 Image Display Note: Due to Google Places API restrictions, restaurant images do not load on the deployed site. To experience the full functionality (including images), please run the project locally (see instructions below).
@@ -24,6 +26,8 @@ Backend:
 - PostgreSQL
 - Hosted on Railway
 
+---
+
 Features
 
 - Search for restaurants by location and category using the Google Places API
@@ -35,7 +39,7 @@ Features
 
 ---
 
-Live Website
+Live Website:
 https://localeats-frontend.vercel.app/
 
 ---
@@ -46,6 +50,8 @@ Run Locally
 3. Install dependiencies (cd client && npm install, cd ../server && npm install)
 4. Start the backend and frontend servers (Backend: cd server node server.js, Frontend: cd client npm run dev)
 5. Visit http://localhost:3000 in your browser.
+
+---
 
 Developer: Ori Ohayon 
 https://www.linkedin.com/in/ori-ohayon/
